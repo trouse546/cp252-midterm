@@ -7,8 +7,8 @@ CREATE DATABASE CPET;
 USE CPET;
 
 CREATE TABLE Courses ( c_id CHAR(7) PRIMARY KEY, c_name VARCHAR(30) NOT NULL, credits INT(1) NOT NULL, semester CHAR(3) NOT NULL );
-CREATE TABLE Plans (plan_id INT AUTO-INCREMENT PRIMARY KEY, )
-CREATE TABLE Students( s_id INT AUTO-INCREMENT PRIMARY KEY, fname VARCHAR(20), lname VARCHAR(20), plan INT FORIGN KEY);
+CREATE TABLE Plans ( plan_id INT , semester char(5) NOT NULL, c_id CHAR(7) FORIEGN KEY NOT NULL)//MAKE ALL THREE PRIMARY KEY
+CREATE TABLE Students ( s_id INT AUTO-INCREMENT PRIMARY KEY, fname VARCHAR(20) NOT NULL, lname VARCHAR(20), plan INT FORIGN KEY DEFAULT '1');
 
 INSERT INTO Courses VALUES ('CPET107', 'Introduction to Programming with C++', '3', 'FL1');
 INSERT INTO Courses VALUES ('ELET101', 'Electric Circuits', '4', 'FL1');
@@ -38,9 +38,9 @@ INSERT INTO Courses VALUES ('CPET252', 'Networking and Internet Technologies', '
 INSERT INTO Courses VALUES ('CPET303', 'Computer Project', '3', 'SP2');
 INSERT INTO Courses VALUES ('HXXXxxx', 'Humanities Elective', '3', 'SP2');
 
-INSERT INTO Students VALUES ('Trevor', 'Rouse', '1');
-INSERT INTO Students VALUES ('Micheal', 'Batbouta', '1');
-INSERT INTO Students VALUES ('Patrick', 'Kennedy', '1');
-INSERT INTO Students VALUES ('Mark', 'Gadoury', '1');
-INSERT INTO Students VALUES ('Miles', 'Luna', '1');
+INSERT INTO Students VALUES ('Trevor', 'Rouse');
+INSERT INTO Students VALUES ('Micheal', 'Batbouta');
+INSERT INTO Students VALUES ('Patrick', 'Kennedy');
+INSERT INTO Students VALUES ('Mark', 'Gadoury');
+INSERT INTO Students VALUES ('Miles', 'Luna');
 
