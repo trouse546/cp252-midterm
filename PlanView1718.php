@@ -9,7 +9,7 @@ $dbname = "CPET";
 $conn = new mysqli($servername, $username, $password, $dbname); 
 // Check connection 
 if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
-$sql = "SELECT P.semester, c_name, credits FROM Plans P JOIN Courses C ON P.c_id = C.c_id WHERE plan_id = '". $id . "'";
+$sql = "SELECT P.semester, c_name, credits FROM Plans P JOIN Courses C ON P.c_id = C.c_id WHERE plan_id = '". $id . "'and (P.semester = 'Spr18' or P.semester = 'Fal17')";
 $result = $conn->query($sql);
 
 $return_arr = array();
