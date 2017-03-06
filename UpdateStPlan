@@ -1,0 +1,25 @@
+<?php
+
+function Update($id) {
+$servername = "localhost"; 
+$username = "root"; 
+$password = "root"; 
+$dbname = "CPET";
+// Create connection 
+$conn = new mysqli($servername, $username, $password, $dbname); 
+// Check connection 
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+$sql = "UPDATE Students SET plan_id = '". $id['plan_id'] ."' WHERE s_id = '". $id['s_id'] ."'";
+$result = $conn->query($sql);
+
+if ($conn->query($sql) == TRUE)
+{ echo "Record updated successfully"; } 
+else 
+{ echo "Error updating record: " . $conn->error; }
+
+$conn->close(); 
+}
+$arr = array('plan_id' => '1', 's_id' => '3');
+
+Update($arr);
+?>
