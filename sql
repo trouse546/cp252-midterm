@@ -4,7 +4,7 @@ CREATE DATABASE CPET;
 
 USE CPET;
 
-CREATE TABLE Courses ( c_id CHAR(7) PRIMARY KEY, c_name VARCHAR(30) NOT NULL, credits INT(1) NOT NULL, semester CHAR(3) NOT NULL );
+CREATE TABLE Courses ( c_id CHAR(7) PRIMARY KEY, c_name VARCHAR(70) NOT NULL, credits INT(1) NOT NULL, semester CHAR(3) NOT NULL );
 CREATE TABLE Plans ( plan_id INT(3) , semester char(5) NOT NULL, c_id CHAR(7) NOT NULL, PRIMARY KEY(plan_id, semester, c_id), FOREIGN KEY(c_id) REFERENCES Courses(c_id));
 CREATE TABLE Students ( s_id INT(3) AUTO_INCREMENT, fname VARCHAR(20) NOT NULL, lname VARCHAR(20), plan_id INT(3) DEFAULT '001', PRIMARY KEY(s_id), FOREIGN KEY(plan_id) REFERENCES Plans(plan_id));
 
