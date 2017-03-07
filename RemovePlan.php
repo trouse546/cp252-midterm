@@ -18,7 +18,5 @@ else
 
 $conn->close(); 
 }
-$arr = array('plan_id' => '3', 'semester' => 'Spr18', 'c_id' => 'CPET107');
-
-RemovePlan($arr);
+RemovePlan($_POST['plan']);
 ?>
