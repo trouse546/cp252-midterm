@@ -19,7 +19,5 @@ else
 
 $conn->close(); 
 }
-$arr = array('plan_id' => '1', 'c_id' => 'CPET125', 'nc_id' => 'CPET107', 'semester' => 'Fal17');
-
-Update($arr);
+Update($_POST['plan']);
 ?>
