@@ -145,34 +145,6 @@ function get_planview_by_id($id) {
 	$stmt = null; 
 }
 
-function Remove_Plan($id) { 
-
-	$handle = Flight::cpet_db(); 
-
-	$handle->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
-
-	$sql = "DELETE FROM Plans WHERE plan_id = '". $id['plan_id']."' and semester = '". $id['semester'] ."' and c_id = '". $id['c_id'] ."'";
-
-	$stmt = $handle->prepare($sql);
-
-	$result = $stmt->execute(array($id));  
-	
-	if($result == true)
-	{	
-		echo "Data Removed";
-	} 
-	else
-	{
-		echo "Remove failed";
-	}
-	
-	$stmt->closeCursor(); 
- 
-	$handle = null; 
-	$stmt = null; 
-}
-
-
 function get_students() { 
 	$handle = Flight::cpet_db(); 
 
@@ -206,7 +178,149 @@ function get_students() {
  
 	$handle = null; 
 	$stmt = null; 
+}
 
+function get_courses() { 
+	$handle = Flight::cpet_db(); 
+
+	$handle->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+
+	$sql = "SELECT * FROM Courses"; 
+
+	$stmt = $handle->prepare($sql);
+
+        try{
+
+		$result = $stmt->execute(); 
+		
+		$rows = array(); 
+
+		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			$rows[] = $row;
+		}
+
+		$row_json = json_encode($rows); 
+		
+		echo $row_json; 
+	 
+
+	}catch(PDOException $e) {
+
+  		echo "error " . $e->getMessage();
+	}
+
+	$stmt->closeCursor(); 
+ 
+	$handle = null; 
+	$stmt = null; 
+}
+
+function Remove_plan($id) { 
+
+	$handle = Flight::cpet_db(); 
+
+	$handle->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+
+	$sql = "DELETE FROM Plans WHERE plan_id = '". $id['plan_id']."' and semester = '". $id['semester'] ."' and c_id = '". $id['c_id'] ."'";
+
+	$stmt = $handle->prepare($sql);
+
+	$result = $stmt->execute(array($id));  
+	
+	if($result == true)
+	{	
+		echo "Data Removed";
+	} 
+	else
+	{
+		echo "Remove failed";
+	}
+	
+	$stmt->closeCursor(); 
+ 
+	$handle = null; 
+	$stmt = null; 
+}
+
+function Add_plan($id) { 
+
+	$handle = Flight::cpet_db(); 
+
+	$handle->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+
+	$sql = "INSERT INTO Plans VALUES ('". $id['plan_id'] ."', '". $id['semester'] ."', '". $id['c_id'] ."')";
+
+	$stmt = $handle->prepare($sql);
+
+	$result = $stmt->execute(array($id));  
+	
+	if($result == true)
+	{	
+		echo "Data Added";
+	} 
+	else
+	{
+		echo "Add failed";
+	}
+	
+	$stmt->closeCursor(); 
+ 
+	$handle = null; 
+	$stmt = null; 
+}
+
+function Update_studentplan($id) { 
+
+	$handle = Flight::cpet_db(); 
+
+	$handle->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+
+	$sql = "UPDATE Students SET plan_id = '". $id['plan_id'] ."' WHERE s_id = '". $id['s_id'] ."'";
+
+	$stmt = $handle->prepare($sql);
+
+	$result = $stmt->execute(array($id));  
+	
+	if($result == true)
+	{	
+		echo "Data Updated";
+	} 
+	else
+	{
+		echo "Update failed";
+	}
+	
+	$stmt->closeCursor(); 
+ 
+	$handle = null; 
+	$stmt = null; 
+}
+
+function Update_plan($id) { 
+
+	$handle = Flight::cpet_db(); 
+
+	$handle->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+
+	$sql = "UPDATE Plans set c_id = '". $id['nc_id'] ."' where plan_id = '". $id['plan_id'] ."' and semester = '". $id['semester'] ."' and c_id = '". $id['c_id'] ."'";
+
+	$stmt = $handle->prepare($sql);
+
+	$result = $stmt->execute(array($id));  
+	
+	if($result == true)
+	{	
+		echo "Data Updated";
+	} 
+	else
+	{
+		echo "Update failed";
+	}
+	
+	$stmt->closeCursor(); 
+ 
+	$handle = null; 
+	$stmt = null; 
 }
 
 Flight::route('GET /Plans(/@planid)', function($planid) { 
@@ -234,9 +348,33 @@ Flight::route('GET /Students', function() {
 } 
 );
 
+Flight::route('GET /Courses', function() { 
+	
+	get_courses(); 	  
+} 
+);
+
 Flight::route('DELETE /RemovePlan/@plan', function($plan) { 
 	
-	Remove_Plan($plan); 	  
+	Remove_plan($plan); 	  
+} 
+);
+
+Flight::route('POST /AddPlan/@plan', function($plan) { 
+	
+	Add_plan($plan); 	  
+} 
+);
+
+Flight::route('UPDATE /UpdateStudentPlan/@plan', function($plan) { 
+	
+	Add_plan($plan); 	  
+} 
+);
+
+Flight::route('UPDATE /UpdatePlan/@plan', function($plan) { 
+	
+	Add_plan($plan); 	  
 } 
 );	 
 
