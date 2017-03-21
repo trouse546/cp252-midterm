@@ -360,7 +360,7 @@ Flight::route('DELETE /RemovePlan/@plan', function($plan) {
 } 
 );
 
-Flight::route('POST /AddPlan/@plan', function($plan) { 
+Flight::route('PUT /AddPlan/@plan', function($plan) { 
 	
 	Add_plan($plan); 	  
 } 
