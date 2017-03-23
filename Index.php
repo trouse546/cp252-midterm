@@ -242,11 +242,14 @@ function Remove_plan($id) {
 	$stmt = null; 
 }
 
-function Add_plan($id) { 
+function Add_plan($json) { 
 
 	$handle = Flight::cpet_db(); 
 
 	$handle->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+
+	$decodedText = html_entity_decode($json);
+	$id = json_decode($decodedText, true);
 
 	$sql = "INSERT INTO Plans VALUES ('". $id['plan_id'] ."', '". $id['semester'] ."', '". $id['c_id'] ."')";
 
