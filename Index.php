@@ -363,19 +363,19 @@ Flight::route('DELETE /RemovePlan/@plan', function($plan) {
 } 
 );
 
-Flight::route('PUT /AddPlan/@plan', function($plan) { 
+Flight::route('POST /AddPlan/@plan', function($plan) { 
 	
 	Add_plan($plan); 	  
 } 
 );
 
-Flight::route('UPDATE /UpdateStudentPlan/@plan', function($plan) { 
+Flight::route('PUT /UpdateStudentPlan/@plan', function($plan) { 
 	
 	Add_plan($plan); 	  
 } 
 );
 
-Flight::route('UPDATE /UpdatePlan/@plan', function($plan) { 
+Flight::route('PUT /UpdatePlan/@plan', function($plan) { 
 	
 	Add_plan($plan); 	  
 } 
