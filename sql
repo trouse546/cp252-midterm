@@ -36,6 +36,8 @@ INSERT INTO Courses VALUES ('CPET252', 'Networking and Internet Technologies', '
 INSERT INTO Courses VALUES ('CPET303', 'Computer Project', '3', 'SP2');
 INSERT INTO Courses VALUES ('HXXXxxx', 'Humanities Elective', '3', 'SP2');
 
+INSERT INTO Plans VALUES ('000', 'Fal00', 'CPET107');
+
 INSERT INTO Plans VALUES ('001', 'Fal17', 'CPET107');
 INSERT INTO Plans VALUES ('001', 'Fal17', 'ELET101');
 INSERT INTO Plans VALUES ('001', 'Fal17', 'ELET115');
