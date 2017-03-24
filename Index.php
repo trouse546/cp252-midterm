@@ -66,44 +66,8 @@ function Add_plan($plan, $sem, $cid) {
 	$stmt = null; 
 }
 
-function Add_planm($json) { 
-
-	$handle = Flight::cpet_db(); 
-
-	$handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	//$decodedText = html_entity_decode($json);
-	$myArray = json_decode($json, true);
-
-	$sql = "INSERT INTO Plans VALUES ('". $myArray['plan_id'] ."', '". $myArray['semester'] ."', '". $myArray['c_id'] ."')";
-
-	$stmt = $handle->prepare($sql);
-
-	$result = $stmt->execute();;
-
-	if($result == true)
-	{	
-		echo "Data Added";
-	} 
-	else
-	{
-		echo "Add failed";
-	}
-	
-	$stmt->closeCursor(); 
-
-	$handle = null; 
-	$stmt = null; 
-}
-
-Flight::route('POST /AddPlan(/@plan/@sem/@cid)', function($plan, $sem, $cid) { 
-	if($plan)
-{
+Flight::route('POST /AddPlan/@plan/@sem/@cid', function($plan, $sem, $cid) { 
 	Add_plan($plan, $sem, $cid);
-}else
-{
-	AddPlanm($_POST['plan']);
-}
 	 	  
 } 
 );
